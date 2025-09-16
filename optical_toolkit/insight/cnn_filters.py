@@ -1,20 +1,16 @@
+from .functions.stitched_image import concat_images, stitched_image
+from .functions.models_and_layers import (get_conv_layer, get_conv_layers,
+                                          infer_input_size, instantiate_model,
+                                          layer_distribution)
+from .functions.filter_patterns import generate_filter_patterns
+from tensorflow import keras
 import os
-from typing import Tuple
 
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-from matplotlib.figure import Figure
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
-from tensorflow import keras
-
-from .functions.filter_patterns import generate_filter_patterns
-from .functions.models_and_layers import (get_conv_layer, get_conv_layers,
-                                          infer_input_size, instantiate_model,
-                                          layer_distribution)
-from .functions.stitched_image import concat_images, stitched_image
 
 
 def display_filters(
@@ -46,7 +42,8 @@ def display_filters(
 
     feature_extractor = keras.Model(inputs=model.input, outputs=layer.output)
 
-    filters = generate_filter_patterns(layer, num_filters, img_sz, feature_extractor)
+    filters = generate_filter_patterns(
+        layer, num_filters, img_sz, feature_extractor)
 
     stitched_filters = stitched_image(filters, num_filters, img_sz)
 
@@ -84,7 +81,8 @@ def display_model_filters(
     """
     model = instantiate_model(model_path, model_custom_objects)
     img_sz = infer_input_size(model)
-    conv_layers = get_conv_layers(model, custom_layer_prefix, layer_name_preference)
+    conv_layers = get_conv_layers(
+        model, custom_layer_prefix, layer_name_preference)
 
     num_layers = len(conv_layers)
 
@@ -104,7 +102,8 @@ def display_model_filters(
             layer.filters if layer.filters < num_filters else num_filters
         )
 
-        feature_extractor = keras.Model(inputs=model.input, outputs=layer.output)
+        feature_extractor = keras.Model(
+            inputs=model.input, outputs=layer.output)
 
         filters = generate_filter_patterns(
             layer, curr_layer_filters, img_sz, feature_extractor
@@ -150,7 +149,8 @@ def convolve(
     elif len(filter.shape) == 3:  # Handle 3D filters (pre-trained models, etc.)
         filter = filter[:, :, :, np.newaxis]
 
-    feature_map = tf.nn.conv2d(image, filter, strides=[1, 1, 1, 1], padding="VALID")
+    feature_map = tf.nn.conv2d(image, filter, strides=[
+                               1, 1, 1, 1], padding="VALID")
     feature_map = tf.squeeze(
         feature_map
     )  # Remove batch and channel dimensions → (H', W')

@@ -100,7 +100,8 @@ def layer_distribution(
 
     if included_indices is not None:
         layer_indices = tf.concat(
-            [layer_indices, tf.convert_to_tensor(included_indices, dtype=tf.int32)],
+            [layer_indices, tf.convert_to_tensor(
+                included_indices, dtype=tf.int32)],
             axis=0,
         )
     if select_topmost:
@@ -123,7 +124,8 @@ def _hierarchical_layers(num_layers):
     mid_percentiles = tf.linspace(0.2, 0.5, 3)
     top_percentiles = tf.linspace(0.5, 0.7, 2)
 
-    percentiles = tf.concat([bot_percentiles, mid_percentiles, top_percentiles], axis=0)
+    percentiles = tf.concat(
+        [bot_percentiles, mid_percentiles, top_percentiles], axis=0)
 
     layer_indices = tf.cast(percentiles * (num_layers - 1), tf.int32)
 
