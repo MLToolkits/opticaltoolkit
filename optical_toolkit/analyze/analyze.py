@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from PIL import Image
 from pypdf import PdfWriter
 
 from optical_toolkit.visualize.visualize_images import summarize_images

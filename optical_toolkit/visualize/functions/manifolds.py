@@ -43,8 +43,7 @@ def get_manifold(manifold_type: str | ManifoldType, dims, kappa, seed):
         ),
         ManifoldType.MDS: MDS(n_components=dims, n_init=1, max_iter=120, n_jobs=-1),
         ManifoldType.RANDOM_TREES: make_pipeline(
-            RandomTreesEmbedding(
-                n_estimators=200, max_depth=5, random_state=seed),
+            RandomTreesEmbedding(n_estimators=200, max_depth=5, random_state=seed),
             TruncatedSVD(n_components=dims),
         ),
         ManifoldType.SPECTRAL: SpectralEmbedding(

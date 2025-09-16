@@ -1,5 +1,5 @@
 import random
-from collections import defaultdict
+from collections import Dict, defaultdict
 from typing import List
 
 import matplotlib.pyplot as plt
@@ -26,11 +26,15 @@ def plot_images(
 
     Args:
         images (List[np.ndarray]): A list of images as NumPy arrays.
-        num_samples (int | None, optional): Number of images to display. If None, displays all.
-        num_cols (int | None, optional): Number of columns in the image grid. If None, it will be inferred to make the grid square-ish.
+        num_samples (int | None, optional): Number of images to display.
+            If None, displays all.
+        num_cols (int | None, optional): Number of columns in the image grid.
+            If None, it will be inferred to make the grid square-ish.
         targets (list | None, optional): Labels corresponding to the images.
-        ordered_plot (bool, optional): Whether to sort images based on targets. Defaults to True.
-        output_path (str, optional): File path to save the image plot. Defaults to "images.png".
+        ordered_plot (bool, optional): Whether to sort images based on targets.
+            Defaults to True.
+        output_path (str, optional): File path to save the image plot.
+            Defaults to "images.png".
 
     Returns:
         plt.Figure: The matplotlib figure object containing the image grid.

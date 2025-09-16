@@ -5,14 +5,14 @@ from sklearn.preprocessing import MinMaxScaler
 
 from optical_toolkit.utils import preprocess
 
-from .functions.manifolds import ManifoldType, get_manifold
+from .functions.manifolds import get_manifold
 
 
 def get_embeddings(
     X,
     y=None,
     embedding_dims: int = 2,
-    embedding_type: str | ManifoldType = "TSNE",
+    embedding_type: str = "tsne",
     output_path: str = "embedding",
     kappa: int = 30,
     return_plot: bool = False,

@@ -124,7 +124,8 @@ def generate_pie_chart(class_counts, output_path):
 
 def combine_images(image_paths, output_path):
     """
-    Combine multiple images vertically with spacing in between and save the combined image as a PDF.
+    Combine multiple images vertically with spacing
+    in between and save the combined image as a PDF.
     """
     images = [Image.open(img_path) for img_path in image_paths]
     images[0].save(output_path, save_all=True, append_images=images[1:], format="PDF")
@@ -132,7 +133,8 @@ def combine_images(image_paths, output_path):
 
 def summarize_image_statistics(X, y, output_path):
     """
-    Main function to summarize the image statistics and combine them into one final image (PDF).
+    Main function to summarize the image statistics
+    and combine them into one final image (PDF).
     """
     # Step 1: Create summary statistics and class counts
     summary, class_counts = create_statistics_table(X, y)

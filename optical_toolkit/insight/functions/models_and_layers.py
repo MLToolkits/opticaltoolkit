@@ -75,8 +75,6 @@ def get_conv_layers(model, custom_layer_prefix, layer_name_preference):
         elif isinstance(layer, tf.keras.layers.Conv2D):
             conv_layers.append(layer)
 
-    print(conv_layers)
-
     return conv_layers
 
 
@@ -95,7 +93,8 @@ def layer_distribution(
         layer_indices = _all_layers(num_layers)
     else:
         ValueError(
-            f"format={format} is not supported. Try 'hierarchical', 'constant', or 'all'"
+            f"format={format} is not supported."
+            f"Valid options are 'hierarchical', 'constant', or 'all'"
         )
 
     if included_indices is not None:
