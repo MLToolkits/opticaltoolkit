@@ -1,6 +1,6 @@
 import random
-from collections import Dict, defaultdict
-from typing import List
+from collections import defaultdict
+from typing import Dict, List
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -49,7 +49,8 @@ def plot_images(
         if targets is not None:
             images, targets = _stratified_sample(images, targets, num_samples)
         else:
-            indices = random.sample(range(len(images)), min(num_samples, len(images)))
+            indices = random.sample(
+                range(len(images)), min(num_samples, len(images)))
             images = [images[i] for i in indices]
 
     images_resized = _resize_images_to_largest(images)
