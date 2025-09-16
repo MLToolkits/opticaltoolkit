@@ -21,8 +21,7 @@ def create_filter(filter_type):
     if filter_type in filters:
         return filters[filter_type]
     elif filter_type == "keras":
-        model = tf.keras.applications.VGG16(
-            weights="imagenet", include_top=False)
+        model = tf.keras.applications.VGG16(weights="imagenet", include_top=False)
         filter = model.layers[1].get_weights()[0]  # First convolution filter
         filter = filter[:, :, :, 0]  # Extract the first filter (simplified)
         return filter[:, :, np.newaxis]  # Make it 3D
@@ -130,5 +129,4 @@ def test_filter_application(image, filter_type, output_path, test_name):
 
     filter = create_filter(filter_type)
 
-    feature_map, _ = convolve(
-        image, filter, output_path=output_path, return_plot=False)
+    feature_map, _ = convolve(image, filter, output_path=output_path, return_plot=False)
